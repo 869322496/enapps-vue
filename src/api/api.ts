@@ -9,5 +9,6 @@ const enum API {
   SESSION_LOGOUT = '/session/destroy',
   BINARY_IMAGE = '/binary/image',
   MENU_LOAD = '/menu/load',
+  MENU_ACTION = '/menu/action',
 }
 export default API;

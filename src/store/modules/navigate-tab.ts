@@ -2,15 +2,19 @@ import { CommonUtil } from '@/utils';
 import { defineStore } from 'pinia';
 import camelcase from 'camelcase';
 import * as snakeCase from 'to-snake-case';
+import { TabComponentItem } from '@/constant/model';
 const useNavigateTabStore = defineStore('navigateTab', {
-  state: () => ({ tabComponents: {} }),
+  state: (): { tabComponents: TabComponentItem[] } => ({ tabComponents: [] }),
   actions: {
-    // prasePythonToBoolean(condition: string, context: Object) {
-    //   return this.praser.eval(condition, context);
-    // },
-    createTab(tab: any) {
-
-    }
+    createTab(tab: { tabTitle: string; componentOptions: Object; changeToNewTab: boolean }) {
+      const { tabTitle, componentOptions, changeToNewTab } = tab;
+      const newTabId = CommonUtil.uuid();
+      this.tabComponents.push({
+        id: newTabId,
+        tabTitle,
+        componentOptions,
+      });
+    },
   },
 });
 export default useNavigateTabStore;

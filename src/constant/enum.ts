@@ -118,3 +118,31 @@ export enum AvatarMenuItemsName {
   About = 'About',
   LogOut = 'Log out',
 }
+export enum ViewType {
+  List = 'list',
+  Form = 'form',
+  Calendar = 'calendar',
+  Graph = 'graph',
+  Kanban = 'kanban',
+  Tree = 'tree',
+  Map = 'map',
+  Page = 'page',
+}
+
+export enum ActionType {
+  New = 'ir.actions.act_window',
+  Refresh = 'ir.actions.act_window_refresh',
+  Close = 'ir.actions.act_window_close',
+  Report = 'ir.actions.report.xml',
+  Link = 'ir.actions.act_url',
+  Binary = 'binary',
+  Url = 'url',
+  Server = 'ir.actions.server',
+  Iframe = 'ir.actions.act_iframe_window',
+}
+
+export enum ViewOpenType {
+  Dialog = 'new',
+  NewTab = 'current',
+  Background = 'background',
+}

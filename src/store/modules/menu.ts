@@ -6,11 +6,15 @@ import { CommonUtil } from '@/utils';
 import { DEFAULT_ICON, MENU_ICON } from '@/constant';
 import { toRaw } from 'vue';
 const useMenuStore = defineStore('menu', {
-  state: (): { menus: MenuEntity[] } => ({
+  state: (): { menus: MenuEntity[]; flattenMenus: MenuEntity[] } => ({
     menus: [],
+    flattenMenus: [],
   }),
-  getters: {
-    menuList: state => {
+  getters: {},
+  actions: {
+    async loadMenus() {
+      const res = await loadMenu();
+      this.menus = res.data.children;
       const getMenuIcon = ({ icon, name }: MenuEntity) => {
         if (MENU_ICON[icon] && icon) {
           return MENU_ICON[icon] || DEFAULT_ICON;
@@ -19,23 +23,14 @@ const useMenuStore = defineStore('menu', {
           return DEFAULT_ICON;
         }
       };
-      const menuArr = CommonUtil.flattenTree<MenuEntity>(toRaw(state.menus), 'parentId').map(
-        item => ({
-          ...item,
-          icon: getMenuIcon(item),
-          parentId: item.parentId ? item.parentId[0] : false,
-          children: [],
-        })
-      );
-      const result = CommonUtil.toTree<MenuEntity>(menuArr, 'parentId');
-      return result;
-    },
-  },
-  actions: {
-    async loadMenus() {
-      const res = await loadMenu();
-      this.menus = res.data.children;
-      console.log(this.menus);
+      this.flattenMenus = CommonUtil.flattenTree<MenuEntity>(toRaw(this.menus), 'parentId');
+      const menuArr = this.flattenMenus.map(item => ({
+        ...item,
+        icon: getMenuIcon(item),
+        parentId: item.parentId ? item.parentId[0] : false,
+        children: [],
+      }));
+      this.menus = CommonUtil.toTree<MenuEntity>(menuArr, 'parentId');
     },
   },
 });

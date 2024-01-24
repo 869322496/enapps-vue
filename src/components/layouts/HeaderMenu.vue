@@ -10,7 +10,7 @@
       <template #title>{{ item.name }}</template>
     </el-sub-menu> -->
     <header-menu-item
-      v-for="item in menuStore.menuList"
+      v-for="item in menuStore.menus"
       :key="item.id"
       :menu="item"
     ></header-menu-item>
@@ -20,8 +20,43 @@
 <script setup lang="ts" name="HeaderMenu">
 import useMenuStore from '@/store/modules/menu';
 import { ref } from 'vue';
+import { loadMenuAction } from '@/api/menu';
+import { ViewType } from '@/constant';
+import { ActionLoadModel } from '@/constant/model';
+import { userOpenView } from '@/hooks';
 const menuStore = useMenuStore();
-function onMenuSelect(args, a, b) {}
+const openViewService = userOpenView();
+async function onMenuSelect(menuId: string) {
+  const selectedMenu = menuStore.flattenMenus.find(item => `${item.id}` === `${menuId}`);
+  const quickCreate = false;
+  const action: any = {
+    menuId,
+    quickCreate,
+    domain: [],
+  };
+  const res = await loadMenuAction(Number(menuId));
+  let [[, , menuAction]] = res.action as [[any, any, menuAction: ActionLoadModel]];
+  if (action.viewMode && action.isShortcut) {
+    menuAction = { ...menuAction, viewMode: action.viewMode };
+  }
+  let options = {
+    ...menuAction,
+    domain: [...(menuAction.domain || []), ...action.domain],
+    defaultAction: {
+      isShortCut: action.isShortcut,
+      context: action.context,
+      quickCreate: action.quickCreate,
+      calloutDomain: action.calloutDomain,
+      shortcutType: action.shortcutType,
+      sort: action.sort,
+    },
+  };
+  // if (action.menuAction.defaultAction?.quickCreate) {
+  //   options = { ...options, viewType: ViewType.Form };
+  // }
+  options = { ...options, actionMenuId: action.menuId };
+  openViewService.openNewView(options);
+}
 </script>
 
 <style scoped lang="scss">
