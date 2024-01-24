@@ -1,0 +1,65 @@
+// import dark theme
+// @use 'element-plus/theme-chalk/src/dark/css-vars.scss' as *;
+
+@font-face {
+  font-family: Poppins, sans-serif;
+  src:
+    url('@/assets/fonts/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2') format('woff2'),
+    url('@/assets/fonts/pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2') format('woff2'),
+    url('@/assets/fonts/pxiEyp8kv8JHgFVrJJbecmNE.woff2') format('woff2'),
+    url('@/assets/fonts/pxiEyp8kv8JHgFVrJJfecg.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  // font-family: Inter, system-ui, Avenir, 'Helvetica Neue', Helvetica,
+  //   'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial,
+  //   sans-serif;
+  font-family: Poppins, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  .ep-input__inner {
+    font-family: Poppins, sans-serif;
+  }
+}
+
+a {
+  color: $color-primary;
+}
+
+ul.ep-menu.ep-menu--popup {
+  padding: unset;
+}
+
+.ep-menu.ep-menu--horizontal .ep-sub-menu .ep-sub-menu__title .ep-sub-menu__icon-arrow {
+  display: none !important;
+}
+.ep-menu:not(.ep-menu--collapse) .ep-sub-menu__title {
+  padding-right: var(--ep-menu-base-level-padding) !important;
+}
+.ep-menu.ep-menu--horizontal .ep-sub-menu .ep-sub-menu__title {
+  color: #fff;
+  &:hover {
+    background-color: var(--ep-color-primary) !important;
+    color: #000;
+  }
+}
+.ep-menu.ep-menu--horizontal {
+  justify-content: flex-start;
+}
+// .ep-menu--horizontal > .ep-sub-menu.is-active .ep-sub-menu__title {
+//   color: #fff;
+// }
+.ep-menu--horizontal .ep-menu.ep-menu--popup > .ep-menu-item.is-active {
+  color: #000;
+}
+.ep-menu--horizontal .ep-menu.ep-menu--popup .ep-sub-menu.is-active > .ep-sub-menu__title {
+  color: #000;
+}
+.ep-menu--horizontal .ep-menu.ep-menu--popup > .ep-menu-item.is-active {
+  &:hover {
+    color: var(--ep-color-primary);
+  }
+}

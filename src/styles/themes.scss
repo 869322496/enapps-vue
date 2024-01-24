@@ -1,0 +1,48 @@
+:root[theme='Default'] {
+  --theme-color: rgb(245, 128, 40);
+  --theme-color-transparent: rgb(245, 128, 40, 38%);
+  --theme-color-darker: rgb(252, 114, 9);
+}
+
+:root[theme='Blue'] {
+  --theme-color: rgb(34, 182, 209);
+  --theme-color-transparent: rgb(34, 182, 209, 38%);
+  --theme-color-darker: rgb(31, 164, 187);
+}
+
+:root[theme='Red'] {
+  --theme-color: rgb(214, 49, 66);
+  --theme-color-transparent: rgb(214, 49, 66, 38%);
+  --theme-color-darker: rgb(187, 30, 46);
+}
+
+:root[theme='Black'] {
+  --theme-color: rgb(13, 13, 13);
+  --theme-color-transparent: rgb(54 54 54 / 73%);
+  --theme-color-darker: rgb(7, 7, 7);
+}
+
+:root[theme='Green'] {
+  --theme-color: rgb(43, 147, 112);
+  --theme-color-transparent: rgb(43, 147, 112, 38%);
+  --theme-color-darker: rgb(24, 136, 99);
+}
+
+:root[theme='Purple'] {
+  --theme-color: rgb(94, 94, 157);
+  --theme-color-transparent: rgb(94, 94, 157, 38%);
+  --theme-color-darker: rgb(86, 86, 168);
+}
+:root[theme='Dark'] {
+  --theme-dark-color: rgb(0, 0, 0);
+  --theme-color: rgb(245, 128, 40);
+  --theme-color-transparent: rgb(245, 128, 40, 38%);
+  --theme-color-darker: rgb(216, 109, 27);
+  --colorUnactive: rgb(255, 255, 255);
+  --colorFormBorder: #444c54;
+  --calloutsBgColor: #1a1a1a;
+  --calloutsTextColor: #fff;
+}
+:root {
+  --colorFormBorder: #ced4da rgb(206, 212, 218);
+}
