@@ -1,6 +1,7 @@
 <template>
   <BaseHeader />
   <div class="flex main-container">
+    <navigate-tab></navigate-tab>
     <!-- <BaseSide /> -->
     <!-- <div class="w-full py-4">
       <Logos class="my-4" />

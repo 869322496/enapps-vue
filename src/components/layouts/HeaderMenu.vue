@@ -30,7 +30,9 @@ function onMenuSelect(args, a, b) {}
 // }
 .ep-menu--horizontal.ep-menu {
   background-color: var(--ep-color-primary);
+  max-width: 70vw !important;
 }
+
 :deep(.ep-menu--horizontal.ep-menu .ep-sub-menu .ep-sub-menu__title) {
   color: #fff;
   &:hover {

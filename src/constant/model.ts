@@ -81,3 +81,8 @@ export interface Flags {
   sidebar?: boolean;
   viewsWwitcher?: boolean;
 }
+export interface TabComponentItem {
+  id: string;
+  tabTitle?: string | HTMLElement;
+  componentOptions?: Object;
+}
