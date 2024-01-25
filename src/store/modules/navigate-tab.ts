@@ -35,6 +35,16 @@ const useNavigateTabStore = defineStore('navigateTab', {
       } else {
       }
     },
+    changeTab(option: { index?: number; id?: string }) {
+      const { index, id } = option;
+      if (index != -1) {
+        this.currentTabIndex = index;
+      }
+      if (id) {
+        this.currentTabId = id;
+      }
+      this.setCurrentTabId();
+    },
     setCurrentTabId() {
       // if (this.tabsWithTitles[this.currentTabId]) {
       //   this.titleService.setTitle(this.tabsWithTitles[this.currentTabId]);

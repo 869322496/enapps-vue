@@ -84,5 +84,11 @@ export interface Flags {
 export interface TabComponentItem {
   id: string;
   tabTitle?: string | HTMLElement;
-  componentOptions?: Object;
+  componentOptions?: MainOptionsModel;
+}
+export interface MainOptionsModel extends ActionLoadModel {
+  viewType?: string;
+  parentService?: any;
+  calloutDomain?: any;
+  data?: any;
 }

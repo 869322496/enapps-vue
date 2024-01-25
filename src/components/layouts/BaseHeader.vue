@@ -14,21 +14,21 @@ import { onMounted, onUnmounted, ref } from 'vue';
 const menuRef = ref(null);
 const settingRef = ref(null);
 
-onMounted(() => {
-  const updateMaxWidth = () => {
-    if (menuRef.value && settingRef.value) {
-      const settingWidth = settingRef.value.$el.getBoundingClientRect().width;
-      menuRef.value.$el.style.maxWidth = `${window.innerWidth - settingWidth}px`;
-    }
-  };
+// onMounted(() => {
+//   const updateMaxWidth = () => {
+//     if (menuRef.value && settingRef.value) {
+//       const settingWidth = settingRef.value.$el.getBoundingClientRect().width;
+//       menuRef.value.$el.style.maxWidth = `${window.innerWidth - settingWidth}px`;
+//     }
+//   };
 
-  window.addEventListener('resize', updateMaxWidth);
-  updateMaxWidth();
+//   window.addEventListener('resize', updateMaxWidth);
+//   updateMaxWidth();
 
-  onUnmounted(() => {
-    window.removeEventListener('resize', updateMaxWidth);
-  });
-});
+//   onUnmounted(() => {
+//     window.removeEventListener('resize', updateMaxWidth);
+//   });
+// });
 </script>
 <style lang="scss" scoped>
 :deep(.ep-menu--horizontal.ep-menu) {

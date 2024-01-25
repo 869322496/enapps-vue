@@ -14,6 +14,7 @@ import { formatToken, getToken } from '../auth';
 import { CookieUtil } from '../cookie';
 import NProgress from 'nprogress';
 import useConvertStore from '@/store/modules/convert';
+import useAuthStore from '@/store/modules/auth';
 const defaultConfig: AxiosRequestConfig = {
   // 请求超时时间
   timeout: 10000,
@@ -109,7 +110,6 @@ class EnappsHttp {
       }
     );
   }
-
   /** 响应拦截 */
   private httpInterceptorsResponse(): void {
     const instance = EnappsHttp.axiosInstance;
@@ -124,6 +124,11 @@ class EnappsHttp {
       },
       (error: EnappsHttpError) => {
         const $error = error;
+        ElMessage.error(error.message);
+        const authStore = useAuthStore();
+        if (error.response.status == 502) {
+          authStore.logout(true);
+        }
         $error.isCancelRequest = Axios.isCancel($error);
         // 关闭进度条动画
         NProgress.done();

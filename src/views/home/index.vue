@@ -2,17 +2,22 @@
   <BaseHeader />
   <div class="main-container">
     <navigate-tab />
-    <Main></Main>
-    <!-- <BaseSide /> -->
-    <!-- <div class="w-full py-4">
-      <Logos class="my-4" />
-      <HelloWorld :msg="'Hello Vue 3 + Element Plus + Vite'" />
-    </div> -->
+    <template v-for="(item, index) in tabStore.tabComponents" :key="index">
+      <div :style="{ display: index === tabStore.currentTabIndex ? 'block' : 'none' }">
+        <EnappsMain
+          :options="item.componentOptions"
+          :tab-id="item.id"
+          :tab-title="item.tabTitle"
+        ></EnappsMain>
+      </div>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import Main from '@/views/main/index.vue';
+import useNavigateTabStore from '@/store/modules/navigate-tab';
+import EnappsMain from '@/views/main/index.vue';
+const tabStore = useNavigateTabStore();
 </script>
 
 <style></style>

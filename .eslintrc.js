@@ -25,7 +25,17 @@ module.exports = {
     'prettier', // 引入规范插件 eslint-plugin-prettier
     '@typescript-eslint',
   ],
-  globals: {},
+  globals: {
+    // 这里是为修复按需自动导入element-ui 组件样式丢失
+    defineEmits: 'readonly',
+    defineProps: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly',
+    WeixinJSBridge: 'readonly',
+    ElMessage: 'readonly',
+    ElMessageBox: 'readonly',
+    ElLoading: 'readonly',
+  },
   // 这里时配置规则的,自己看情况配置
   rules: {
     // 禁用组件名称必须是多个单词。

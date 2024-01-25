@@ -31,6 +31,7 @@
 import { MenuEntity } from '@/constant/model';
 import { DEFAULT_ICON, MENU_ICON } from '@/constant';
 import { onBeforeMount } from 'vue';
+
 const { menu } = withDefaults(defineProps<{ menu: MenuEntity }>(), {
   menu: null,
 });

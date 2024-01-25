@@ -4,13 +4,18 @@ import vue from '@vitejs/plugin-vue';
 import eslintPlugin from 'vite-plugin-eslint';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-
 import { viteMockServe } from 'vite-plugin-mock';
+import AutoImport from 'unplugin-auto-import/vite';
 import { proxy } from './proxy';
-// const pathSrc = path.resolve(__dirname, 'src');
+import dotenv from 'dotenv';
+import fs from 'fs';
+const pathSrc = path.resolve(__dirname, 'src');
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
+  if (fs.existsSync('.env.development') && command === 'serve') {
+    dotenv.config({ path: '.env.development' });
+  }
   return {
     resolve: {
       alias: {
@@ -22,6 +27,10 @@ export default defineConfig(({ command }) => {
       eslintPlugin(),
       // mock启动，只在开发环境使用
       viteMockServe({ enable: command === 'serve', mockPath: 'mock' }),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+        dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
+      }),
       Components({
         // allow auto load markdown components under `./src/components/`
         extensions: ['vue', 'md'],

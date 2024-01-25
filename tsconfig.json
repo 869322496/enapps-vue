@@ -3,7 +3,6 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
@@ -21,6 +20,13 @@
   "vueCompilerOptions": {
     "target": 3
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "vite.config.*"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "vite.config.*",
+    "proxy.ts"
+  ],
   "exclude": ["node_modules", "dist", "**/*.js"]
 }

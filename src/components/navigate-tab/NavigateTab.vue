@@ -94,6 +94,7 @@ function onItemClick(index: number) {
   if (tabsService.currentTabIndex === index) {
     return;
   }
+  tabsService.changeTab({ index });
   // if (this.isDragging) {
   //   this.isDragging = false;
   //   console.log('dragging');

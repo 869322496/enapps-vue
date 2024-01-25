@@ -3,12 +3,10 @@
     mode="horizontal"
     :menu-trigger="'click'"
     :unique-opened="true"
+    :ellipsis="false"
     :close-on-click-outside="true"
     @select="onMenuSelect"
   >
-    <!-- <el-sub-menu v-for="(item, index) in menuStore.menuList" :key="item.id" :index="`${index}`">
-      <template #title>{{ item.name }}</template>
-    </el-sub-menu> -->
     <header-menu-item
       v-for="item in menuStore.menus"
       :key="item.id"
@@ -60,13 +58,13 @@ async function onMenuSelect(menuId: string) {
 </script>
 
 <style scoped lang="scss">
-// .ep-menu {
-//   background-color: var(--ep-color-primary);
-// }
 .ep-menu--horizontal.ep-menu {
   background-color: var(--ep-color-primary);
-  max-width: 70vw !important;
   font-weight: 500;
+  overflow-x: auto;
+  // white-space: nowrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
 :deep(.ep-menu--horizontal.ep-menu .ep-sub-menu .ep-sub-menu__title) {
