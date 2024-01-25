@@ -1,3 +1,5 @@
+//发布应用 生成commit日志记录。
+
 module.exports = {
   types: [
     { type: 'feat', section: '✨ Features | 新功能' },

@@ -16,6 +16,12 @@ npm run dev
 npm run build
 ```
 
+### Git Commit
+
+```bash
+npm run commit
+```
+
 ### Custom theme
 
 See `src/styles/element/index.scss`.
