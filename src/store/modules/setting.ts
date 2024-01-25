@@ -3,7 +3,7 @@ import { useChangeColor } from '@/utils';
 import { ref } from 'vue';
 import { useStorage } from '@vueuse/core';
 import defaultSettings from '@/settings';
-const { getLightColor, getDarkColor } = useChangeColor();
+const { getLightColor, getDarkColor, hexToRgb } = useChangeColor();
 const useSettingStore = defineStore('setting', () => {
   // state
   const themeColors = ref<string[]>([
@@ -19,6 +19,12 @@ const useSettingStore = defineStore('setting', () => {
   // actions
   function changeThemeColor(color: string) {
     document.documentElement.style.setProperty('--ep-color-primary', color);
+
+    const rgb = hexToRgb(color);
+    document.documentElement.style.setProperty(
+      '--ep-color-primary-transparent',
+      `rgba(${rgb},38%)`
+    );
     document.documentElement.style.setProperty(
       '--ep-color-primary-dark-2',
       `${getDarkColor(color, 0.1)}`

@@ -1,6 +1,6 @@
 <template>
   <div class="navigate-tab">
-    <div v-if="hasScrollbar" class="left button" @click="onLeft()" :class="{ disabled: atStart }">
+    <div v-if="hasScrollbar" class="left button" :class="{ disabled: atStart }" @click="onLeft()">
       <span class="e-icons e-chevron-left"></span>
     </div>
     <div
@@ -9,44 +9,41 @@
       @mousemove="onMouseMove"
       @mousedown="onMouseDown"
     >
-      <!-- <div
-        class="item-container"
+      <div
+        v-for="(item, i) in tabsService.tabComponents"
+        :key="item.id"
         :class="{ active: tabsService.currentTabIndex === i }"
-        *ngFor="let item of tabsService.componentRefs$ | async; let i = index"
+        class="item-container"
       >
         <div
           class="item"
-          (contextmenu)="onItemRemove($event, i)"
-          cssClass="{{
-          tabsService.currentTabIndex === i
-            ? 'tab-active'
-            : '' + (tabsService.changedTabs[item.id] ? ' unsaved' : '')
-        }} "
-          (mouseup)="onItemMouseUp($event, i)"
-          (click)="onItemClick(i)"
-          [class.active]="tabsService.currentTabIndex === i"
+          :class="{
+            'tab-active': tabsService.currentTabIndex === i,
+            unsaved: tabsService.changedTabs[item.id],
+            active: tabsService.currentTabIndex === i,
+          }"
+          @contextmenu.prevent="onItemRemove(i)"
+          @mouseup="onItemMouseUp($event, i)"
+          @click="onItemClick(i)"
         >
           <div
-            [innerHTML]="item.tabTitle"
             style="display: flex; align-items: center; justify-content: center"
+            v-html="item.tabTitle"
           ></div>
           <i
             class="e-icons e-close navigate-close"
             title="Close"
-            (click)="onItemRemove($event, i)"
+            @click.prevent="onItemRemove(i)"
           ></i>
         </div>
 
         <div class="item-border"></div>
-      </div> -->
+      </div>
     </div>
     <div v-if="hasScrollbar" class="right button" :class="{ disabled: atEnd }" @click="onRight">
       <span class="e-icons e-chevron-right"></span>
     </div>
-    <!-- <div
-      class="item-space"
-      [class.no-border]="(tabsService.componentRefs$ | async).length === 0"
-    ></div> -->
+    <div class="item-space" :class="{ 'no-border': !tabsService.tabComponents?.length }"></div>
 
     <!-- <div
       (click)="onLogoClick()"
@@ -59,8 +56,9 @@
 </template>
 
 <script setup lang="ts" name="NavigateTab">
+import useNavigateTabStore from '@/store/modules/navigate-tab';
 import { ref } from 'vue';
-
+const tabsService = useNavigateTabStore();
 const tabInstance = ref<HTMLDivElement>();
 const atStart = ref(true);
 const atEnd = ref(true);
@@ -80,6 +78,35 @@ function onLeft() {
     behavior: 'smooth',
   });
 }
+function onItemRemove(i: number) {
+  this.tabsService?.removeTab(i, () => {
+    this.onScroll();
+  });
+}
+function onItemMouseUp(event: MouseEvent, i: number) {
+  if (event.button === 1) {
+    // tabsService?.removeTab(i, () => {
+    //   onScroll();
+    // });
+  }
+}
+function onItemClick(index: number) {
+  if (tabsService.currentTabIndex === index) {
+    return;
+  }
+  // if (this.isDragging) {
+  //   this.isDragging = false;
+  //   console.log('dragging');
+  //   return;
+  // }
+  // // if there is already an other item sticky need to reset
+  // if (this.tabsService.currentTabIndex != index) {
+  //   this.resetItemPostion(this.tabsService.currentTabIndex);
+  // }
+  // this.tabsService?.changeTab(index);
+  // this.tabsService.currentTabIndex = index;
+  // this.onScroll();
+}
 </script>
 
 <style scoped lang="scss">
@@ -88,10 +115,9 @@ function onLeft() {
 }
 .navigate-tab {
   display: flex;
-  align-items: center;
-  display: flex;
   align-items: flex-end;
-  /* padding: 0px 0px 0px 4px; */
+  margin: 10px;
+  // padding: 0px 0px 0px 4px;
   // margin: 0 10px;
   // img {
   //   height: 50px;
@@ -110,7 +136,7 @@ function onLeft() {
     max-width: 28px;
     width: 100%;
     justify-content: center;
-    border-bottom: 1px solid var(--theme-color);
+    border-bottom: 1px solid var(--ep-color-primary);
     .e-icons.e-chevron-left:before {
       font-size: 18px;
     }
@@ -140,7 +166,7 @@ function onLeft() {
       display: inline-block;
       height: 38px;
       position: relative;
-      border-bottom: 1px solid var(--theme-color);
+      border-bottom: 1px solid var(--ep-color-primary);
       border-radius: 4px 4px 0 0;
     }
     .item {
@@ -149,16 +175,16 @@ function onLeft() {
       transition:
         background-color 0.2s ease,
         color 0.2s ease;
-      background-color: var(--theme-color-transparent);
+      background-color: var(--ep-color-primary-transparent);
       border-radius: 4px 4px 0 0;
-      border: 1px solid var(--theme-color);
+      border: 1px solid var(--ep-color-primary);
       border-bottom: 0;
       position: relative;
       display: flex;
       align-items: center;
       padding: 0 10px;
       font-size: 0.813rem;
-      font-family: 'Poppins', Arial, 'Lucida Grande', Helvetica, Verdana, sans-serif;
+      // font-family: 'Poppins', Arial, 'Lucida Grande', Helvetica, Verdana, sans-serif;
       cursor: pointer;
       i {
         font-size: 12px;
@@ -192,7 +218,7 @@ function onLeft() {
   }
   .item-space {
     flex: 1;
-    border-bottom: 1px solid var(--theme-color);
+    border-bottom: 1px solid var(--ep-color-primary);
   }
   .items-container::-webkit-scrollbar {
     /* WebKit */
@@ -203,7 +229,7 @@ function onLeft() {
 .logo-container {
   height: 50px !important;
   width: 220px !important;
-  border-bottom: 1px solid var(--theme-color);
+  border-bottom: 1px solid var(--ep-color-primary);
   img {
     object-fit: contain;
     cursor: pointer;

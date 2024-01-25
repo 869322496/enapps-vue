@@ -33,6 +33,6 @@ declare module 'vue' {
     NavigateTab: typeof import('./components/navigate-tab/NavigateTab.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Test: typeof import('./components/test.vue')['default']
+    Test: (typeof import('./components/test.vue'))['default']
   }
 }
