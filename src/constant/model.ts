@@ -1,3 +1,4 @@
+import { ViewType } from './enum';
 import { Domain } from './types';
 
 export interface DatasetCallRequestModel {
@@ -31,7 +32,7 @@ export interface ActionLoadModel extends ActionModel {
   viewMode: string;
   viewId?: any[];
   resModel: string;
-  views: [number | false, string][];
+  views: [number | false, ViewType][];
   domain: Domain;
   bomStructure?;
 }

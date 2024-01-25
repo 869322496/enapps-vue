@@ -221,6 +221,36 @@ export const AVATAR_REQUEST_OPTIONS = {
   field: 'avatar',
   args: { avatar: 1 },
 };
+
+export const ENAPPS_ICONS = {
+  filter: 'fa-solid fa-filter',
+  add: 'fa-solid fa-plus',
+  plus: 'fa-solid fa-plus',
+  pullrequest: 'fa-solid fa-plus',
+  delete: 'fa-solid fa-trash',
+  iconFirst: 'fa-solid fa-angles-left',
+  iconPrev: 'fa-solid fa-angle-left',
+  iconNext: 'fa-solid fa-angle-right',
+  iconLast: 'fa-solid fa-angles-right',
+  iconReload: 'fa-solid fa-rotate',
+  iconSave: 'fa-solid fa-floppy-disk',
+  iconCreate: 'fa-solid fa-square-plus',
+  iconCopy: 'fa-solid fa-copy',
+  iconDelete: 'fa-solid fa-trash',
+  openLink: 'fa-solid fa-square-up-right',
+  faWindowMaximize: 'fa-solid fa-window-maximize',
+  list: 'fa-solid fa-list',
+  form: 'fa-solid fa-desktop',
+  calendar: 'fa-solid fa-calendar-days',
+  graph: 'fa-solid fa-chart-pie',
+  kanban: 'fa-brands fa-trello',
+  map: 'fa-solid fa-location-dot',
+  pivot: 'fa-solid fa-clipboard-list',
+  error: 'fa-solid fa-circle-exclamation',
+  iconExternalLink: 'fa-solid fa-arrow-up-right-from-square',
+  iconCheckbox: 'fa-solid fa-list-check',
+};
+
 export const MENU_ICON = {
   'terp-stock': 'fa-solid fa-warehouse',
   'icon-plus': 'fa-solid fa-plus',
