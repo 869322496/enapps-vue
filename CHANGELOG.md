@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/869322496/enapps-vue/compare/v0.1.1...v0.1.2) (2024-01-25)
+
+
+### 📝 Documentation | 文档
+
+* 11 ([35c5511](https://github.com/869322496/enapps-vue/commit/35c55110951bb137710e8cda8248d2d8dafbe405))
+
 ### 0.1.1 (2024-01-25)
 
 
