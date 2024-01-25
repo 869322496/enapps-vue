@@ -12,10 +12,10 @@
     "commitlint": "commitlint --config commitlint.config.cjs -e -V",
     "prepare": "husky install",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
-    "commit": "git cz"
+    "commit": "git add . && git cz"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1", 
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
