@@ -5,16 +5,16 @@ export class PrasePyConditionUtil {
   cs: any;
   constructor() {
     this.cs = useConvertStore;
-    let _that = this;
-    let NUMBER = /^\d$/,
-      NAME_FIRST = /^[a-zA-Z_]$/,
-      NAME = /^[a-zA-Z0-9_]$/;
+    const _that = this;
+    const NUMBER = /^\d$/;
+    const NAME_FIRST = /^[a-zA-Z_]$/;
+    const NAME = /^[a-zA-Z0-9_]$/;
 
-    let create = function (o, props?) {
+    const create = function (o, props?) {
       function F() {}
       F.prototype = o;
-      let inst = new F();
-      for (let name in props) {
+      const inst = new F();
+      for (const name in props) {
         if (!props.hasOwnProperty(name)) {
           continue;
         }
@@ -23,9 +23,9 @@ export class PrasePyConditionUtil {
       return inst;
     };
 
-    let symbols = {};
-    let comparators = {};
-    let Base = {
+    const symbols = {};
+    const comparators = {};
+    const Base = {
       nud: function () {
         throw new Error(this.id + ' undefined as prefix');
       },
@@ -43,13 +43,13 @@ export class PrasePyConditionUtil {
         } else if (this.id === '(end)') {
           return '(end)';
         } else if (this.id === '(comparator)') {
-          let repr = ['(comparator', this.expressions[0]];
+          const repr = ['(comparator', this.expressions[0]];
           for (let i = 0; i < this.operators.length; ++i) {
             repr.push(this.operators[i], this.expressions[i + 1]);
           }
           return repr.join(' ') + ')';
         }
-        let out = [this.id, this.first, this.second, this.third]
+        const out = [this.id, this.first, this.second, this.third]
           .filter(function (r) {
             return r;
           })
@@ -59,7 +59,7 @@ export class PrasePyConditionUtil {
     };
     function symbol(id, bp?) {
       bp = bp || 0;
-      let s = symbols[id];
+      const s = symbols[id];
       if (s) {
         if (bp > s.lbp) {
           s.lbp = bp;
@@ -104,7 +104,7 @@ export class PrasePyConditionUtil {
     }
     function comparator(id) {
       comparators[id] = true;
-      let bp = 60;
+      const bp = 60;
       infix(id, bp, function (left) {
         this.id = '(comparator)';
         this.operators = [id];
@@ -184,7 +184,8 @@ export class PrasePyConditionUtil {
     comparator('==');
 
     infix('|', 70);
-    infix('^', 80), infix('&', 90);
+    infix('^', 80);
+    infix('&', 90);
 
     infix('<<', 100);
     infix('>>', 100);
@@ -194,7 +195,8 @@ export class PrasePyConditionUtil {
 
     infix('*', 120);
     infix('/', 120);
-    infix('//', 120), infix('%', 120);
+    infix('//', 120);
+    infix('%', 120);
 
     prefix('-', 130);
     prefix('+', 130);
@@ -280,9 +282,9 @@ export class PrasePyConditionUtil {
           if (token.id === '}') {
             break;
           }
-          let key = expression();
+          const key = expression();
           advance(':');
-          let value = expression();
+          const value = expression();
           this.first.push([key, value]);
           if (token.id !== ',') {
             break;
@@ -294,7 +296,7 @@ export class PrasePyConditionUtil {
       return this;
     };
 
-    let longops = {
+    const longops = {
       '*': ['*'],
       '<': ['<', '=', '>'],
       '>': ['=', '>'],
@@ -308,9 +310,9 @@ export class PrasePyConditionUtil {
     }
     Tokenizer.prototype = {
       builder: function (empty) {
-        let key = this.states[0] + '_builder';
+        const key = this.states[0] + '_builder';
         if (empty) {
-          let value = this[key];
+          const value = this[key];
           delete this[key];
           return value;
         } else {
@@ -328,7 +330,7 @@ export class PrasePyConditionUtil {
       },
 
       feed: function (str, index) {
-        let s = this.states;
+        const s = this.states;
         return this[s[s.length - 1]](str, index);
       },
 
@@ -336,7 +338,7 @@ export class PrasePyConditionUtil {
         let character = str[index];
 
         if (character in longops) {
-          let follow = longops[character];
+          const follow = longops[character];
           for (let i = 0, len = follow.length; i < len; ++i) {
             if (str[index + 1] === follow[i]) {
               character += follow[i];
@@ -377,7 +379,7 @@ export class PrasePyConditionUtil {
         );
       },
       string: function (str, index) {
-        let character = str[index];
+        const character = str[index];
         if (character === '"' || character === "'") {
           this.tokens.push(
             create(symbols['(string)'], {
@@ -391,7 +393,7 @@ export class PrasePyConditionUtil {
         return index + 1;
       },
       number: function (str, index) {
-        let character = str[index];
+        const character = str[index];
         if (!(character == '.' || NUMBER.test(character))) {
           this.tokens.push(
             create(symbols['(number)'], {
@@ -405,9 +407,9 @@ export class PrasePyConditionUtil {
         return index + 1;
       },
       name: function (str, index) {
-        let character = str[index];
+        const character = str[index];
         if (!NAME.test(character)) {
-          let name = this.builder(true).join('');
+          const name = this.builder(true).join('');
           let symbol = symbols[name];
           if (symbol) {
             if (name === 'in' && this.tokens[this.tokens.length - 1].id === 'not') {
@@ -434,8 +436,8 @@ export class PrasePyConditionUtil {
     };
 
     _that.praser.tokenize = function tokenize(str) {
-      let index = 0,
-        tokenizer = new Tokenizer();
+      let index = 0;
+      const tokenizer = new Tokenizer();
       str += '\0';
 
       do {
@@ -496,10 +498,10 @@ export class PrasePyConditionUtil {
       };
       return expression();
     };
-    let evaluate_operator = function (operator, a, b) {
-      let datetime_format =
+    const evaluate_operator = function (operator, a, b) {
+      const datetime_format =
         /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01]) [0-2][0-3]:[0-5][0-9]:[0-5][0-9]$/;
-      let date_format = /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
+      const date_format = /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
       if (typeof a === 'string' && typeof b === 'string') {
         if (datetime_format.test(a) && date_format.test(b)) {
           a = a.split(' ')[0];
@@ -554,7 +556,7 @@ export class PrasePyConditionUtil {
     _that.praser.evaluate = function (expr?, context?) {
       switch (expr.id) {
         case '(name)':
-          let val = context[_that.cs.toCamelCase(expr.value)];
+          const val = context[_that.cs.toCamelCase(expr.value)];
           if (val === undefined) {
             console.warn("NameError: name '" + expr.value + "' is not defined");
           }
@@ -568,8 +570,8 @@ export class PrasePyConditionUtil {
           else if (expr.value === 'True') return true;
           throw new Error("SyntaxError: unknown constant '" + expr.value + "'");
         case '(comparator)':
-          let result,
-            left = _that.praser.evaluate(expr.expressions[0], context);
+          let result;
+          let left = _that.praser.evaluate(expr.expressions[0], context);
           for (let i = 0; i < expr.operators.length; ++i) {
             result = evaluate_operator(
               expr.operators[i],
@@ -600,15 +602,15 @@ export class PrasePyConditionUtil {
           );
         case '(':
           if (expr.second) {
-            let fn = _that.praser.evaluate(expr.first, context),
-              args = [];
+            const fn = _that.praser.evaluate(expr.first, context);
+            const args = [];
             for (let jj = 0; jj < expr.second.length; ++jj) {
               args.push(_that.praser.evaluate(expr.second[jj], context));
             }
             return _that.praser.evaluate.apply(this, args);
           }
-          let tuple_exprs = expr.first,
-            tuple_values = [];
+          const tuple_exprs = expr.first;
+          const tuple_values = [];
           for (let j = 0, len = tuple_exprs.length; j < len; ++j) {
             tuple_values.push(_that.praser.evaluate(tuple_exprs[j], context));
           }
@@ -617,15 +619,15 @@ export class PrasePyConditionUtil {
           if (expr.second) {
             throw new Error('SyntaxError: indexing not implemented yet');
           }
-          let list_exprs = expr.first,
-            list_values = [];
+          const list_exprs = expr.first;
+          const list_values = [];
           for (let k = 0; k < list_exprs.length; ++k) {
             list_values.push(_that.praser.evaluate(list_exprs[k], context));
           }
           return create(_that.praser.list, { values: list_values });
         case '{':
-          let dict_exprs = expr.first,
-            dict_values = {};
+          const dict_exprs = expr.first;
+          const dict_values = {};
           for (let l = 0; l < dict_exprs.length; ++l) {
             dict_values[_that.praser.evaluate(dict_exprs[l][0], context)] = _that.praser.evaluate(
               dict_exprs[l][1],

@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
+  // 在lint报错时提供更好的信息和建议
   extends: [
     'plugin:vue/vue3-recommended', // 使用插件支持vue3
     'plugin:prettier/recommended',
@@ -21,9 +22,9 @@ module.exports = {
     },
   },
   plugins: [
-    'vue', // 引入vue的插件 eslint-plugin-vue
     'prettier', // 引入规范插件 eslint-plugin-prettier
-    '@typescript-eslint',
+    '@typescript-eslint',    
+    'vue', // 引入vue的插件 eslint-plugin-vue
   ],
   globals: {
     // 这里是为修复按需自动导入element-ui 组件样式丢失
