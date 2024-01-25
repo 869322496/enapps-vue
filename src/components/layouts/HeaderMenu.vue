@@ -66,6 +66,7 @@ async function onMenuSelect(menuId: string) {
 .ep-menu--horizontal.ep-menu {
   background-color: var(--ep-color-primary);
   max-width: 70vw !important;
+  font-weight: 500;
 }
 
 :deep(.ep-menu--horizontal.ep-menu .ep-sub-menu .ep-sub-menu__title) {

@@ -1,27 +1,45 @@
 // import dark theme
 // @use 'element-plus/theme-chalk/src/dark/css-vars.scss' as *;
 
+// 一定要按字体粗细引入
 @font-face {
-  font-family: Poppins, sans-serif;
-  src:
-    url('@/assets/fonts/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2') format('woff2'),
-    url('@/assets/fonts/pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2') format('woff2'),
-    url('@/assets/fonts/pxiEyp8kv8JHgFVrJJbecmNE.woff2') format('woff2'),
+  font-family: 'Poppins';
+  src:    
+    //regular
     url('@/assets/fonts/pxiEyp8kv8JHgFVrJJfecg.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
-
+@font-face {
+  font-family: 'Poppins';
+  src: url('@/assets/fonts/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('@/assets/fonts/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Poppins';
+  src:    
+    //regular
+    url('@/assets/fonts/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
 body {
   // font-family: Inter, system-ui, Avenir, 'Helvetica Neue', Helvetica,
   //   'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial,
   //   sans-serif;
-  font-family: Poppins, sans-serif;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   .ep-input__inner {
-    font-family: Poppins, sans-serif;
+    font-family: 'Poppins', sans-serif;
   }
 }
 
@@ -52,6 +70,13 @@ ul.ep-menu.ep-menu--popup {
 // .ep-menu--horizontal > .ep-sub-menu.is-active .ep-sub-menu__title {
 //   color: #fff;
 // }
+.ep-menu--horizontal .ep-menu.ep-menu--popup .ep-sub-menu__title {
+  &:hover {
+    outline: none;
+    color: var(--ep-menu-hover-text-color);
+    background-color: var(--ep-menu-hover-bg-color);
+  }
+}
 .ep-menu--horizontal .ep-menu.ep-menu--popup > .ep-menu-item.is-active {
   color: #000;
 }

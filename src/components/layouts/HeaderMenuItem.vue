@@ -43,8 +43,8 @@ const { menu } = withDefaults(defineProps<{ menu: MenuEntity }>(), {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 0.875rem;
+
   // color: #fff;
   // &:hover {
   //   color: #000;
