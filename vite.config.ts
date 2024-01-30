@@ -13,6 +13,7 @@ const pathSrc = path.resolve(__dirname, 'src');
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
+  console.log(proxy);
   if (fs.existsSync('.env.development') && command === 'serve') {
     dotenv.config({ path: '.env.development' });
   }
@@ -63,8 +64,8 @@ export default defineConfig(({ command }) => {
     },
     // 配置跨域
     server: {
-      open: false, //是否自动打开浏览器，可选项
-      cors: true, //允许跨域。
+      open: false, // 是否自动打开浏览器，可选项
+      cors: true, // 允许跨域。
       // 设置代理
       // proxy: {
       // 将请求代理到另一个服务器

@@ -146,3 +146,11 @@ export enum ViewOpenType {
   NewTab = 'current',
   Background = 'background',
 }
+
+export enum FilterActions {
+  SAVE_FILTER = 'Save Filter',
+  ADD_TO_DASHBOARD = 'Add to Dashboard',
+  ADD_TO_CALLOUTS = 'Add to Callouts',
+  MANAGE_FILTERS = 'Manage Filters',
+  MANAGE_SHORTCUTS = 'Manage Callouts',
+}

@@ -19,7 +19,7 @@
 <script setup lang="ts" name="EnappsMain">
 import { ENAPPS_ICONS, MainOptionsModel, ViewType } from '@/constant';
 import { onBeforeMount, ref } from 'vue';
-import SearchBar from './components/search-bar/index.vue';
+import SearchBar from './search-bar/index.vue';
 interface MainProps {
   options: MainOptionsModel;
   tabId: string;
