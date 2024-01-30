@@ -12,13 +12,14 @@
         <font-awesome-icon :icon="ENAPPS_ICONS[view[1]]" />
       </span>
     </div>
-    <div class="flex-1">search view/form control</div>
+    <SearchBar />
   </div>
 </template>
 
 <script setup lang="ts" name="EnappsMain">
 import { ENAPPS_ICONS, MainOptionsModel, ViewType } from '@/constant';
 import { onBeforeMount, ref } from 'vue';
+import SearchBar from './components/search-bar/index.vue';
 interface MainProps {
   options: MainOptionsModel;
   tabId: string;

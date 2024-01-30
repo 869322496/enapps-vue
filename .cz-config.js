@@ -1,4 +1,4 @@
-// 在根目录下创建.cz-config.js
+// 请使用npm run c/yarn c提交代码。遵循代码提交规范
 module.exports = {
   types: [
     { value: 'feat', name: '功能:     ✨  新增功能', emoji: ':sparkles:' },
